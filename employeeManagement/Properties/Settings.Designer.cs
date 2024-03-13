@@ -8,14 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using System.Collections.Generic;
-
 namespace employeeManagement.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.9.0.0")]
-    internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
+    public sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
         
@@ -25,17 +23,31 @@ namespace employeeManagement.Properties {
             }
         }
         
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"<?xml version=""1.0"" encoding=""utf-16""?>
+<SerializableConnectionString xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"">
+  <ConnectionString>Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;Encrypt=True</ConnectionString>
+  <ProviderName>System.Data.SqlClient</ProviderName>
+</SerializableConnectionString>")]
+        public global::System.Collections.Generic.List<employeeManagement.Notification> Notifications {
+            get {
+                return ((global::System.Collections.Generic.List<employeeManagement.Notification>)(this["Notifications"]));
+            }
+            set {
+                this["Notifications"] = value;
+            }
+        }
+        
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\dataBank.mdf;" +
-            "Integrated Security=True;Connect Timeout=30;Encrypt=True")]
+            "Integrated Security=True;Connect Timeout=30;")]
         public string dataBankConnectionString {
             get {
                 return ((string)(this["dataBankConnectionString"]));
             }
         }
-
-        public List<Notification> Notifications { get; internal set; }
     }
 }

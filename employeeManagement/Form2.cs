@@ -18,14 +18,13 @@ namespace employeeManagement
 {
     public partial class Form2 : Form
     {
-        string connectionString;
-        string dataFileName = "dataBank.mdf";
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+
         public Form2()
         {
             InitializeComponent();
             string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
-
+           
         }
 
 

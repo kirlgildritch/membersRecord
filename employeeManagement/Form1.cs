@@ -19,13 +19,15 @@ namespace employeeManagement
     public partial class Form1 : Form
     {
      
-        private Settings settingsForm;
+    
         private static bool isNotificationPreferenceOn = true;
         private EmployeeData employeeData = new EmployeeData();
         private ContextMenuStrip attendanceContextMenu;
-        string connectionString;
-        string dataFileName = "dataBank.mdf";
-        
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+
+
+
+
         private ContextMenuStrip subcolumnContextMenu;
        
 
@@ -35,13 +37,12 @@ namespace employeeManagement
               
         InitializeComponent();
 
-            settingsForm = new Settings();
-            settingsForm.NotificationPreferenceChanged += SettingsForm_NotificationPreferenceChanged;
+            
 
             InitializeAttendanceContextMenu();
             InitializeSubcolumnContextMenu();
-            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
+
+           
 
         }
         private void InitializeSubcolumnContextMenu()

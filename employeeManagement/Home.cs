@@ -11,8 +11,8 @@ namespace employeeManagement
 
     public partial class Home : Form
     {
-        string connectionString;
-        string dataFileName = "dataBank.mdf";
+        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+
 
         public Home()
         {
@@ -21,9 +21,7 @@ namespace employeeManagement
             timer1.Start(); // Start the timer
             DoubleBuffered = true; // Enable double buffering
 
-            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
-
+           
 
         }
 
