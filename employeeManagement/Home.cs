@@ -11,7 +11,8 @@ namespace employeeManagement
 
     public partial class Home : Form
     {
-        private string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+        string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=DatabaseDal;Integrated Security=True;TrustServerCertificate=True";
+
 
 
         public Home()

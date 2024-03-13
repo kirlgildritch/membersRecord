@@ -16,12 +16,13 @@ namespace employeeManagement
     {
         private Main main;
         DataTable inventory = new DataTable();
-        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+        string connectionString = "Data Source=localhost\\SQLEXPRESS;Initial Catalog=DatabaseDal;Integrated Security=True;TrustServerCertificate=True";
+
 
         public Inventory()
         {
             InitializeComponent();
-
+         
         }
 
         private void Inventory_Load(object sender, EventArgs e)

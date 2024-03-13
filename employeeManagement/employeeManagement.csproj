@@ -180,11 +180,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dataBankDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>dataBankDataSet.xsd</DependentUpon>
-    </Compile>
     <Compile Include="Dialogs\messageDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -290,17 +285,6 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="dataBankDataSet.xsc">
-      <DependentUpon>dataBankDataSet.xsd</DependentUpon>
-    </None>
-    <None Include="dataBankDataSet.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>dataBankDataSet.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="dataBankDataSet.xss">
-      <DependentUpon>dataBankDataSet.xsd</DependentUpon>
-    </None>
     <None Include="employeeManagement_TemporaryKey.pfx" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -359,20 +343,6 @@
     <None Include="Resources\cogwheel.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="dataBank.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="dataBank_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>dataBank.mdf</DependentUpon>
-    </Content>
-    <Content Include="Database1.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Database1_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-      <DependentUpon>Database1.mdf</DependentUpon>
-    </Content>
     <None Include="Resources\icons8-settings-24.png" />
     <None Include="Resources\icons8-stocks-24.png" />
     <None Include="Resources\icons8-help-24.png" />
