@@ -5,13 +5,15 @@ using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
-
+using System.IO;
 namespace employeeManagement
 {
 
     public partial class Home : Form
     {
-       
+        string connectionString;
+        string dataFileName = "dataBank.mdf";
+
         public Home()
         {
             InitializeComponent();
@@ -19,7 +21,9 @@ namespace employeeManagement
             timer1.Start(); // Start the timer
             DoubleBuffered = true; // Enable double buffering
 
-           
+            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
+
 
         }
 
@@ -41,7 +45,7 @@ namespace employeeManagement
 
             try
             {
-                string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;";
+               
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -112,8 +116,7 @@ namespace employeeManagement
 
             try
             {
-                string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;";
-
+              
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     string query = "SELECT ShareCapital FROM Members"; // Adjust your query as needed
@@ -177,7 +180,6 @@ namespace employeeManagement
 
             try
             {
-                string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {

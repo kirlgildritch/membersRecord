@@ -14,7 +14,7 @@ using System.Windows.Forms;
 namespace employeeManagement
 {
    
-
+    //Baho tae
     public partial class Main : Form
     {
         List<Button> menu;
