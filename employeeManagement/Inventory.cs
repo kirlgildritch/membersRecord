@@ -8,7 +8,7 @@ using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
+using System.IO;
 namespace employeeManagement
 {
   
@@ -16,12 +16,14 @@ namespace employeeManagement
     {
         private Main main;
         DataTable inventory = new DataTable();
-        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;";
+        string dataFileName = "dataBank.mdf";
+        string connectionString;
         public Inventory()
         {
             InitializeComponent();
 
-        
+            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
         }
 
         private void Inventory_Load(object sender, EventArgs e)
@@ -138,7 +140,7 @@ namespace employeeManagement
             try
             {
                 string query = "SELECT * FROM Inventory WHERE " + filterColumn + " LIKE @value";
-                using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
@@ -285,7 +287,7 @@ namespace employeeManagement
                 }
                 string addedName = itemTextBox.Text;
                 // create a connection
-                using (SqlConnection connection = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     // create a command to insert the data
                     string query = "INSERT INTO Inventory (ITEM, SPECIFICATION, Price, [in], [out]) VALUES (@ITEM, @SPECIFICATION, @Price, @in, @out)";

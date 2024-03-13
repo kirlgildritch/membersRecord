@@ -18,12 +18,16 @@ namespace employeeManagement
 {
     public partial class Form2 : Form
     {
+        string connectionString;
+        string dataFileName = "dataBank.mdf";
         public Form2()
         {
             InitializeComponent();
+            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
 
         }
-        
+
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -34,7 +38,7 @@ namespace employeeManagement
            
             try
             {
-                using (SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("SELECT * FROM Members", con))

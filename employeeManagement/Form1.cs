@@ -11,7 +11,7 @@ using System.Reflection;
 using employeeManagement.Dialogs;
 using System.Data.Common;
 
-
+using System.IO;
 
 
 namespace employeeManagement
@@ -23,7 +23,9 @@ namespace employeeManagement
         private static bool isNotificationPreferenceOn = true;
         private EmployeeData employeeData = new EmployeeData();
         private ContextMenuStrip attendanceContextMenu;
-        string connectionString = "Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30";
+        string connectionString;
+        string dataFileName = "dataBank.mdf";
+        
         private ContextMenuStrip subcolumnContextMenu;
        
 
@@ -38,8 +40,9 @@ namespace employeeManagement
 
             InitializeAttendanceContextMenu();
             InitializeSubcolumnContextMenu();
+            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
 
-            
         }
         private void InitializeSubcolumnContextMenu()
         {
@@ -209,7 +212,7 @@ namespace employeeManagement
 
         
 
-        SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;");
+    
         private void Form1_Load(object sender, EventArgs e)
         {
             LoadDataIntoGridView();
@@ -378,7 +381,7 @@ namespace employeeManagement
         {
             try
             {
-                using (SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
                     con.Open();
                     using (SqlCommand cmd = new SqlCommand("SELECT * FROM Members ORDER BY DateOfMembership DESC", con))
@@ -429,7 +432,7 @@ namespace employeeManagement
                 {
                     isUpdating = true;
 
-                    using (SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                    using (SqlConnection con = new SqlConnection(connectionString))
                     {
                         con.Open();
 
@@ -572,80 +575,70 @@ namespace employeeManagement
         }
         private void display()
         {
-           
-
-            con.Open();
-
-           
-
-
-            if (searchComboBox.Text == "Name")
+            try
             {
-                string query = "SELECT * FROM Members WHERE LOWER(FullName) LIKE LOWER(@searchTerm)";
-                SqlCommand cmd = new SqlCommand(query, con);
-                cmd.Parameters.AddWithValue("@searchTerm", "%" + searchBox.Text.ToLower() + "%"); // Use parameters to prevent SQL injection
-                SqlDataReader reader = cmd.ExecuteReader();
-                DataTable st = new DataTable();
-                st.Load(reader);
-                dataGridView1.DataSource = st;
-
-
-
-            }
-
-            else if (searchComboBox.Text == "Gender")
-            {
-                try
+                using (SqlConnection con = new SqlConnection(connectionString))
                 {
-                    string searchTerm = searchBox.Text.ToLower() + "%"; 
+                    con.Open();
 
-                    string query = "SELECT * FROM Members WHERE LOWER(Gender) LIKE LOWER(@searchTerm)";
-
-                    using (SqlCommand cmd = new SqlCommand(query, con))
+                    if (searchComboBox.Text == "Name")
                     {
-                        cmd.Parameters.AddWithValue("@searchTerm", searchTerm);
-
-                        using (SqlDataReader reader = cmd.ExecuteReader())
+                        string query = "SELECT * FROM Members WHERE LOWER(FullName) LIKE LOWER(@searchTerm)";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
                         {
-                            DataTable st = new DataTable();
-                            st.Load(reader);
-                            dataGridView1.DataSource = st;
+                            cmd.Parameters.AddWithValue("@searchTerm", "%" + searchBox.Text.ToLower() + "%");
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                DataTable st = new DataTable();
+                                st.Load(reader);
+                                dataGridView1.DataSource = st;
+                            }
                         }
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                if (searchBox.Text == "")
-                {
-                    LoadDataIntoGridView();
+                    else if (searchComboBox.Text == "Gender")
+                    {
+                        string searchTerm = searchBox.Text.ToLower() + "%";
+                        string query = "SELECT * FROM Members WHERE LOWER(Gender) LIKE LOWER(@searchTerm)";
+                        using (SqlCommand cmd = new SqlCommand(query, con))
+                        {
+                            cmd.Parameters.AddWithValue("@searchTerm", searchTerm);
+                            using (SqlDataReader reader = cmd.ExecuteReader())
+                            {
+                                DataTable st = new DataTable();
+                                st.Load(reader);
+                                dataGridView1.DataSource = st;
+                            }
+                        }
+                    }
+                    else if (searchComboBox.Text == "Age")
+                    {
+                        if (int.TryParse(searchBox.Text, out int age))
+                        {
+                            string query = "SELECT * FROM Members WHERE Age = @searchAge";
+                            using (SqlCommand cmd = new SqlCommand(query, con))
+                            {
+                                cmd.Parameters.AddWithValue("@searchAge", age);
+                                using (SqlDataReader reader = cmd.ExecuteReader())
+                                {
+                                    DataTable st = new DataTable();
+                                    st.Load(reader);
+                                    dataGridView1.DataSource = st;
+                                }
+                            }
+                        }
+                    }
+                    if (searchBox.Text == "")
+                    {
+                        LoadDataIntoGridView();
+                    }
                 }
             }
-
-
-            else if (searchComboBox.Text == "Age")
+            catch (Exception ex)
             {
-                if (int.TryParse(searchBox.Text, out int age))
-                {
-                    string query = "SELECT * FROM Members WHERE Age LIKE @searchAge";
-                    SqlCommand cmd = new SqlCommand(query, con);
-                    cmd.Parameters.AddWithValue("@searchAge", age);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    DataTable st = new DataTable();
-                    st.Load(reader);
-                   
-                    dataGridView1.DataSource = st;
-                }
-                if(searchBox.Text == "")
-                {
-                    LoadDataIntoGridView();
-                }
-               
+                MessageBox.Show("An error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            con.Close();
         }
+
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
@@ -674,7 +667,7 @@ namespace employeeManagement
                 {
                     isUpdating = true;
 
-                    using (SqlConnection con = new SqlConnection("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"C:\\Users\\kirlg\\OneDrive\\Desktop\\My Work\\Visual Studio 2022\\Daldesco\\membersRecord\\employeeManagement\\dataBank.mdf\";Integrated Security=True;Connect Timeout=30;"))
+                    using (SqlConnection con = new SqlConnection(connectionString))
                     {
                         con.Open();
 
