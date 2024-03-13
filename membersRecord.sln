@@ -5,7 +5,7 @@ VisualStudioVersion = 17.8.34525.116
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "employeeManagement", "employeeManagement\employeeManagement.csproj", "{78809E26-00D0-49F3-9890-7B8DC9EA6E2D}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DataBankSetup", "DataBankSetup\DataBankSetup.vdproj", "{C29BA5FB-B851-4CCF-9F69-5F2DC1598626}"
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "DaldescoSetup", "DaldescoSetup\DaldescoSetup.vdproj", "{0C8FAE89-3966-4F91-9866-C85DF7E0EDB8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,9 +17,8 @@ Global
 		{78809E26-00D0-49F3-9890-7B8DC9EA6E2D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{78809E26-00D0-49F3-9890-7B8DC9EA6E2D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{78809E26-00D0-49F3-9890-7B8DC9EA6E2D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C29BA5FB-B851-4CCF-9F69-5F2DC1598626}.Debug|Any CPU.ActiveCfg = Debug
-		{C29BA5FB-B851-4CCF-9F69-5F2DC1598626}.Release|Any CPU.ActiveCfg = Release
-		{C29BA5FB-B851-4CCF-9F69-5F2DC1598626}.Release|Any CPU.Build.0 = Release
+		{0C8FAE89-3966-4F91-9866-C85DF7E0EDB8}.Debug|Any CPU.ActiveCfg = Debug
+		{0C8FAE89-3966-4F91-9866-C85DF7E0EDB8}.Release|Any CPU.ActiveCfg = Release
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

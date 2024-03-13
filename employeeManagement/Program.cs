@@ -15,9 +15,7 @@ namespace employeeManagement
         static void Main()
         {
 
-            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            AppDomain.CurrentDomain.SetData("DataDirectory", currentDirectory);
-
+        
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
