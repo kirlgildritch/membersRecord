@@ -14,6 +14,11 @@ namespace employeeManagement
         [STAThread]
         static void Main()
         {
+
+            string currentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            AppDomain.CurrentDomain.SetData("DataDirectory", currentDirectory);
+
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             // Application.Run(new Form3());

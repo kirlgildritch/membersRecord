@@ -17,13 +17,11 @@ namespace employeeManagement
 {
     public partial class inventoryView : Form
     {
-        string dataFileName = "dataBank.mdf";
-        string connectionString;
+        string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\dataBank.mdf;Integrated Security=True;Connect Timeout=30;";
+
         public inventoryView()
         {
             InitializeComponent();
-            string executableDirectory = AppDomain.CurrentDomain.BaseDirectory;
-            connectionString = $"Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=\"{Path.Combine(executableDirectory, dataFileName)}\";Integrated Security=True;Connect Timeout=30;";
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)

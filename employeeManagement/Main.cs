@@ -31,7 +31,7 @@ namespace employeeManagement
         private Home home;
         private Inventory inventory;
      
-        private NotificationsForm not;
+        
         private Help help;
         public Main()
         {
